@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <!-- <script src="./test.js"></script> -->
+    <script src="../../packages/vue/dist/vue.global.js"></script>
+    <script>
+
+    const ref = Vue.ref;
+    const effect = Vue.effect;
+    const reactive = Vue.reactive;
+    const computed = Vue.computed;
+
+    const state = reactive({
+        count: 1,
+    })
+    // const double = computed({
+    //     get () {
+    //         return state.count * 2
+    //     },
+    //     set (newValue) {
+    //         console.log(newValue)
+    //         state.count = newValue;
+    //     }
+    // })
+    // console.log(double.value)
+    const double = computed(() => {
+      console.log('000')
+      return state.count + 2;
+    })
+
+    var d;
+    effect(() => {
+        d = double.value
+    })
+    state.count = 1
+    console.log('d', d)
+    double.effect();
+    state.count = 10
+    console.log('d', d)
+    // const double2 = computed(() => {
+    // console.log('000')
+    // return double.value * 2;
+    // })
+
+    // console.log('double2', double2.value)
+    // console.log('double', double.value)
+    // state.count++
+    // console.log('double2', double2.value)
+    // console.log('double', double.value)
+    // double.value
+    // console.log(double.value)
+    // console.log('double.value', state.count)
+    // state.count = 6
+    // console.log(double.value)
+    // double.value
+    // state.count = 6
+    // console.log(state.count)
+        
+
+        // const state = reactive({
+        //     count: 1,
+        // })
+        // // console.log(state.count)
+        // const double = computed(() => state.count * 2)
+        // effect(() => {
+        //     console.log(double.value)
+        // })
+        // setInterval(() => {
+        //     state.count++
+        // }, 1000)
+        // state.count = 2
+
+        // const count = ref({a: 1});
+        // effect(() => {
+        //     console.log('count1:', count.value.a)
+        // })
+        // count.value.a = 2
+
+
+        // const a = reactive({value: 1, name: 'kir'})
+        // effect(() => {
+        //     console.log('name:', a.name)
+        // })
+        // setInterval(() => {
+        //     a.name = '2pde'
+        // }, 1000);
+    </script>
+</body>
+</html>

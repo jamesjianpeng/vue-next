@@ -14,6 +14,7 @@ const builtInSymbols = new Set(
 function createGetter(isReadonly: boolean) {
   return function get(target: any, key: string | symbol, receiver: any) {
     const res = Reflect.get(target, key, receiver)
+    console.log('isRef(res)', isRef(res))
     if (typeof key === 'symbol' && builtInSymbols.has(key)) {
       return res
     }

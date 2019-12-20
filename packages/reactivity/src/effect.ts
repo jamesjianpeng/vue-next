@@ -122,6 +122,7 @@ export function track(
     return
   }
   const effect = activeReactiveEffectStack[activeReactiveEffectStack.length - 1]
+  // console.log(effect);
   if (effect) {
     if (type === OperationTypes.ITERATE) {
       key = ITERATE_KEY

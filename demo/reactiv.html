@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../packages/vue/dist/vue.global.js"></script>
+    <script>
+        let proxy = Vue.readonly({name:'zf'});
+        // 副作用
+        // Vue.effect(()=>{
+        //     console.log(proxy.name)
+        // })
+        proxy.name = 'jw';
+
+        const count = Vue.ref(0);
+        console.log('===', count); // 0
+        Vue.watch(() => {
+            console.log(count.value)
+        })
+        setTimeout(() => {
+            count.value++; // 打印1
+        }, 1000);
+        // count.value++;
+        // console.log(count.value); // 1
+    </script>
+</body>
+</html>

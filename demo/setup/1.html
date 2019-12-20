@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="../../packages/vue/dist/vue.global.js"></script>
+    <script>
+        function usePosition(){
+            let position = Vue.reactive({x:0,y:0});
+            function update(e){
+                position.x = e.pageX;
+                position.y = e.pageY;
+            }
+            Vue.onMounted(()=>{
+                window.addEventListener('mousemove',update)
+            })
+            Vue.onUnmounted(()=>{
+                window.removeEventListener('mousemove',update)
+            });
+            return position
+        }
+        // 我们要获取 鼠标的位置 这个功能在很多地方都需要被复用
+        // composition api 多个方法进行组合来使用的
+        const App = {
+            setup(){ // created , 只会执行一次
+              let state = Vue.reactive({name:'zf'});
+              let position = usePosition();
+              function change(){
+                state.name = 'jw'
+              }
+              return { // 这个对象会作为渲染的上下文
+                state,
+                change,
+                position
+              }
+            },
+            template:`<div @click="change">{{state.name}} x:{{position.x}} y{{position.y}}</div>`
+        }
+        Vue.createApp().mount(App,container)
+    </script>
+</body>
+</html>

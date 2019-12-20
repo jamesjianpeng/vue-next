@@ -73,6 +73,7 @@ export function createAppContext(): AppContext {
 export function createAppAPI<HostNode, HostElement>(
   render: RootRenderFunction<HostNode, HostElement>
 ): () => App<HostElement> {
+  console.log('0000000')
   return function createApp(): App {
     const context = createAppContext()
 
